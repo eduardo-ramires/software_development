@@ -51,6 +51,9 @@ public class TelaCalculator extends javax.swing.JFrame {
         n8 = new javax.swing.JButton();
         C = new javax.swing.JButton();
         lblValor = new javax.swing.JLabel();
+        quadrado = new javax.swing.JButton();
+        porcent = new javax.swing.JButton();
+        raiz = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,33 +196,67 @@ public class TelaCalculator extends javax.swing.JFrame {
             }
         });
 
+        quadrado.setText("x²");
+        quadrado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quadradoActionPerformed(evt);
+            }
+        });
+
+        porcent.setText("÷");
+        porcent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                porcentActionPerformed(evt);
+            }
+        });
+
+        raiz.setText("√");
+        raiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                raizActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(lblValor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resultado))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(resultado)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(plus, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(minus, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(times, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(plus1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(C, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(UNDEFINED1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(porcent, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(quadrado, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(division, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(n4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(174, 174, 174)
                         .addComponent(n6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(plus, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(minus, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(times, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(plus1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(C, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(UNDEFINED1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(n7, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,19 +278,19 @@ public class TelaCalculator extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(n1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(174, 174, 174)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(division, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(n3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(n3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(raiz, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblValor)))
+                .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(plus1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,8 +302,13 @@ public class TelaCalculator extends javax.swing.JFrame {
                     .addComponent(minus, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(times, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(division, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(division, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(quadrado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(porcent, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(raiz, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(n1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(n2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +328,7 @@ public class TelaCalculator extends javax.swing.JFrame {
                     .addComponent(n0, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(igual, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(point, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -298,7 +340,7 @@ public class TelaCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_n7ActionPerformed
 
     private void plus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plus1ActionPerformed
-        // TODO add your handling code here:
+        resultado.setText("");
     }//GEN-LAST:event_plus1ActionPerformed
 
     private void n9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n9ActionPerformed
@@ -306,17 +348,33 @@ public class TelaCalculator extends javax.swing.JFrame {
         resultado.setText(resultado.getText() + "9");
     }//GEN-LAST:event_n9ActionPerformed
 
-    private void UNDEFINED1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UNDEFINED1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UNDEFINED1ActionPerformed
-
     private void igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_igualActionPerformed
         // TODO add your handling code here:
         double resulatdoFinal;
         v2 = Double.parseDouble(resultado.getText());
-        if(operacao == "soma"){
+        if(operacao.equals("soma")){
             resulatdoFinal = v1 + v2;
             lblValor.setText(v1 + "+" + v2 + "= " );
+            resultado.setText(String.valueOf(resulatdoFinal));
+        }
+        if(operacao.equals("subtracao")){
+            resulatdoFinal = v1 - v2;
+            lblValor.setText(v1 + "-" + v2 + "= " );
+            resultado.setText(String.valueOf(resulatdoFinal));
+        }
+        if(operacao.equals("times")){
+            resulatdoFinal = v1 * v2;
+            lblValor.setText(v1 + "X" + v2 + "= " );
+            resultado.setText(String.valueOf(resulatdoFinal));
+        }
+        if(operacao.equals("division")){
+            resulatdoFinal = v1 / v2;
+            lblValor.setText(v1 + "/" + v2 + "= " );
+            resultado.setText(String.valueOf(resulatdoFinal));
+        }
+        if(operacao.equals("porcent")){
+            resulatdoFinal = v1 * (v2/100);
+            lblValor.setText(v1 + "÷" + v2 + "= " );
             resultado.setText(String.valueOf(resulatdoFinal));
         }
     }//GEN-LAST:event_igualActionPerformed
@@ -356,11 +414,19 @@ public class TelaCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_pointActionPerformed
 
     private void minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
+        lblValor.setText(resultado.getText() + "-");
+        v1 = Double.parseDouble(resultado.getText());
+        operacao = "subtracao";
+        resultado.setText("");
     }//GEN-LAST:event_minusActionPerformed
 
     private void divisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divisionActionPerformed
         // TODO add your handling code here:
+        lblValor.setText(resultado.getText() + "/");
+        v1 = Double.parseDouble(resultado.getText());
+        operacao = "division";
+        resultado.setText("");
     }//GEN-LAST:event_divisionActionPerformed
 
     private void n4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n4ActionPerformed
@@ -383,6 +449,10 @@ public class TelaCalculator extends javax.swing.JFrame {
 
     private void timesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timesActionPerformed
         // TODO add your handling code here:
+        lblValor.setText(resultado.getText() + "+");
+        v1 = Double.parseDouble(resultado.getText());
+        operacao = "times";
+        resultado.setText("");
     }//GEN-LAST:event_timesActionPerformed
 
     private void n8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n8ActionPerformed
@@ -391,8 +461,37 @@ public class TelaCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_n8ActionPerformed
 
     private void CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CActionPerformed
-        // TODO add your handling code here:
+        lblValor.setText("" );
+        resultado.setText("");
+        v1 =0;
+        v2 =0;
     }//GEN-LAST:event_CActionPerformed
+
+    private void UNDEFINED1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UNDEFINED1ActionPerformed
+        if (resultado.getText() != null && !resultado.getText().isEmpty()) {
+            // Remove o último caractere (do índice 0 até o penúltimo)
+            resultado.setText(resultado.getText().substring(0, resultado.getText().length() - 1));
+        }
+    }//GEN-LAST:event_UNDEFINED1ActionPerformed
+
+    private void quadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quadradoActionPerformed
+        lblValor.setText(resultado.getText() + "²=");
+        v1 = Double.parseDouble(resultado.getText());
+        resultado.setText(String.valueOf(v1 * v1));
+    }//GEN-LAST:event_quadradoActionPerformed
+
+    private void porcentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porcentActionPerformed
+         lblValor.setText(resultado.getText() + "÷");
+        v1 = Double.parseDouble(resultado.getText());
+        operacao = "porcent";
+        resultado.setText("");
+    }//GEN-LAST:event_porcentActionPerformed
+
+    private void raizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raizActionPerformed
+        lblValor.setText(resultado.getText() + "√");
+        v1 = Double.parseDouble(resultado.getText());
+        resultado.setText(String.valueOf(Math.sqrt(v1)));
+    }//GEN-LAST:event_raizActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,6 +538,9 @@ public class TelaCalculator extends javax.swing.JFrame {
     private javax.swing.JButton plus;
     private javax.swing.JButton plus1;
     private javax.swing.JButton point;
+    private javax.swing.JButton porcent;
+    private javax.swing.JButton quadrado;
+    private javax.swing.JButton raiz;
     private javax.swing.JTextField resultado;
     private javax.swing.JButton times;
     // End of variables declaration//GEN-END:variables
