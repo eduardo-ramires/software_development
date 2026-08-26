@@ -49,10 +49,15 @@ public class Arquivo {
                 String endereco = campos[6];
                 String estado = campos[7];
                 String celular = campos[8];
+                
+                Aluno a = new Aluno(nome, dt_nasc, sexo, matricula, curso, cpf, endereco, estado, celular);
+                listaAlunos.add(a);
+                
             }
         }catch(FileNotFoundException e){
             System.out.println("Arquivo n encontrado");
         }catch(IOException e){
+            System.out.println("erro io "+e.getMessage());
             e.printStackTrace();
         }
         return listaAlunos;
