@@ -36,4 +36,8 @@ public class Aluno {
         return nome + ";" + dt_nasc + ";" + sexo + ";" + matricula + ";" + curso + ";" + cpf + ";" + endereco + ";" + estado + ";" + celular;
     }
     
+    public Object[] obterDados(){
+        return new Object[] {nome, dt_nasc, sexo, matricula, curso, cpf, endereco,estado, celular};
+    }
+    
 }

@@ -4,6 +4,9 @@
  */
 package com.mycompany.class_04;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author eduardoramires
@@ -11,12 +14,18 @@ package com.mycompany.class_04;
 public class Painel extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Painel.class.getName());
+    
+    char sexo;
+    Arquivo arquivo;
+    private List<Aluno> listaAlunos;
 
     /**
      * Creates new form Painel
      */
     public Painel() {
         initComponents();
+        arquivo = new Arquivo("Alunos");
+        listaAlunos = arquivo.lerArquivo();
     }
 
     /**
@@ -53,6 +62,8 @@ public class Painel extends javax.swing.JFrame {
         resultado = new javax.swing.JScrollPane();
         resultado1 = new javax.swing.JTextArea();
         date = new javax.swing.JFormattedTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_alunos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,18 +117,29 @@ public class Painel extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        tbl_alunos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "dt_nasc", "sexo", "matricula", "curso", "cpf", "endereco", "estado", "celular"
+            }
+        ));
+        jScrollPane2.setViewportView(tbl_alunos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,15 +156,15 @@ public class Painel extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel4)
                                         .addComponent(jLabel1)
-                                        .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                        .addComponent(matricula))
+                                        .addComponent(name)
+                                        .addComponent(matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5)
                                         .addComponent(curso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(date, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
                                     .addGap(51, 51, 51)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel3)
@@ -151,15 +173,15 @@ public class Painel extends javax.swing.JFrame {
                                             .addGap(18, 18, 18)
                                             .addComponent(F))
                                         .addComponent(jLabel6)
-                                        .addComponent(cpf))))
+                                        .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel7))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 134, Short.MAX_VALUE)))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +232,8 @@ public class Painel extends javax.swing.JFrame {
                         .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
                 .addComponent(save)
-                .addGap(32, 32, 32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -219,10 +242,26 @@ public class Painel extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
          if(F.isSelected()){
             Aluno a = new Aluno(name.getText(), date.getText(), 'F', matricula.getText(), curso.getSelectedItem()+"", cpf.getText(), endereco.getText(), estado.getText(), celular.getText());
+            listaAlunos.add(a);
+            arquivo.gravarArquivo();
+            System.out.println("Aluno adicionado!");
+            for(Aluno aluno : listaAlunos ){
+                System.out.println(aluno);
+            }
             resultado1.append(a+"");
+            DefaultTableModel tabela = (DefaultTableModel) tbl_alunos.getModel();
+            tabela.addRow(a.obterDados());
          }else if(M.isSelected()){
             Aluno a = new Aluno(name.getText(), date.getText(), 'M', matricula.getText(), curso.getSelectedItem()+"", cpf.getText(), endereco.getText(), estado.getText(), celular.getText());
+           listaAlunos.add(a);
+            arquivo.gravarArquivo();
+            System.out.println("Aluno adicionado!");
+            for(Aluno aluno : listaAlunos ){
+                System.out.println(aluno);
+            }
             resultado1.append(a+"");
+            DefaultTableModel tabela = (DefaultTableModel) tbl_alunos.getModel();
+            tabela.addRow(a.obterDados());
          }else{}
     }//GEN-LAST:event_saveActionPerformed
 
@@ -279,11 +318,13 @@ public class Painel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField matricula;
     private javax.swing.JTextField name;
     private javax.swing.ButtonGroup painel;
     private javax.swing.JScrollPane resultado;
     private javax.swing.JTextArea resultado1;
     private javax.swing.JToggleButton save;
+    private javax.swing.JTable tbl_alunos;
     // End of variables declaration//GEN-END:variables
 }
