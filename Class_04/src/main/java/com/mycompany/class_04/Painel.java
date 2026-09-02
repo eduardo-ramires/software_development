@@ -5,6 +5,7 @@
 package com.mycompany.class_04;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,6 +19,7 @@ public class Painel extends javax.swing.JFrame {
     char sexo;
     Arquivo arquivo;
     private List<Aluno> listaAlunos;
+    private int linhaEdicao = -1;
 
     /**
      * Creates new form Painel
@@ -72,6 +74,8 @@ public class Painel extends javax.swing.JFrame {
         date = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_alunos = new javax.swing.JTable();
+        delete = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +135,13 @@ public class Painel extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tbl_alunos);
 
+        delete.setText("Excluir");
+        delete.addActionListener(this::deleteActionPerformed);
+
+        edit.setText("Editar");
+        edit.setToolTipText("");
+        edit.addActionListener(this::editActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,11 +167,19 @@ public class Painel extends javax.swing.JFrame {
                                 .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                                 .addComponent(save)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
-                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(79, 79, 79))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel6)
+                                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(79, 79, 79))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(delete)
+                                .addGap(18, 18, 18)
+                                .addComponent(edit)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
@@ -243,7 +262,9 @@ public class Painel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(save))))
+                            .addComponent(save)
+                            .addComponent(delete)
+                            .addComponent(edit))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -259,9 +280,15 @@ public class Painel extends javax.swing.JFrame {
          }else if(M.isSelected()){
             a = new Aluno(name.getText(), date.getText(), 'M', matricula.getText(), curso.getSelectedItem()+"", cpf.getText(), endereco.getText(), estado.getText(), celular.getText());
          }
-        listaAlunos.add(a);
+        if(linhaEdicao == -1){
+            listaAlunos.add(a);
+        }else{
+            listaAlunos.set(linhaEdicao, a);
+            linhaEdicao= -1;
+        }
         arquivo.gravarArquivo();
         System.out.println("Aluno adicionado!");
+        JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso!");
         for(Aluno aluno : listaAlunos ){
             System.out.println(aluno);
         }
@@ -285,6 +312,49 @@ public class Painel extends javax.swing.JFrame {
     private void matriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_matriculaActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        int linha = tbl_alunos.getSelectedRow();
+        if(linha == -1){
+           JOptionPane.showMessageDialog(null, "Selecione uma pessoa na tabela.", "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir esta pessoa?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if(resposta == JOptionPane.YES_OPTION){
+            listaAlunos.remove(linha);
+            
+            arquivo.gravarArquivo();
+            DefaultTableModel tabela = (DefaultTableModel) tbl_alunos.getModel();
+            
+            tabela.removeRow(linha);
+            
+            System.out.println("Pessoa excluida!");
+       }
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+        int linha = tbl_alunos.getSelectedRow();
+        if(linha == -1){
+           JOptionPane.showMessageDialog(null, "Selecione uma pessoa na tabela.", "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        linhaEdicao = linha;
+        Aluno a = listaAlunos.get(linha);
+        name.setText(a.nome);
+        date.setText(a.dt_nasc);
+        matricula.setText(a.matricula);
+        curso.setSelectedItem(a.curso);
+        cpf.setText(a.cpf);
+        endereco.setText(a.endereco);
+        estado.setText(a.estado);
+        celular.setText(a.celular);
+        if (a.sexo == 'M') { // ou a.getSexo() caso o atributo seja privado
+            M.setSelected(true);
+        } else if (a.sexo == 'F') {
+            F.setSelected(true);
+        }
+        
+    }//GEN-LAST:event_editActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,6 +388,8 @@ public class Painel extends javax.swing.JFrame {
     private javax.swing.JTextField cpf;
     private javax.swing.JComboBox<String> curso;
     private javax.swing.JFormattedTextField date;
+    private javax.swing.JButton delete;
+    private javax.swing.JButton edit;
     private javax.swing.JTextArea endereco;
     private javax.swing.JTextField estado;
     private javax.swing.JLabel jLabel1;
