@@ -1,0 +1,8 @@
+mudei;mudei2;23/23/1111;n;Tecnologia;n;
+scsc;cscccc;22/22/2222;t;teste;t;
+teste;teste aut;22/22/2222;d;Historia;N;
+dddd;dddd;11/11/1111;D;Tecnologia;N;
+eduardoeeee;edueeeee;15/06/2005;F;Tecnologia;N;
+novo;novo;11/11/1111;D;Tecnologia;N;
+;;  /  /    ;D;Tecnologia;N;
+qwqwqw;qwqwqw;22/22/2222;F;Tecnologia;N;
