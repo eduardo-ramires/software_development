@@ -1,0 +1,92 @@
+
+create database BDAula01;
+
+show databases;
+
+use BDAula01;
+
+CREATE TABLE pessoa(
+	id int auto_increment PRIMARY KEY,
+    nome varchar(50) NOT NULL,
+    sexo varchar(1) NOT NULL,
+    idioma varchar(10) NOT NULL
+);
+
+show tables;
+desc pessoa;
+
+insert into pessoa (nome, sexo, idioma)
+values
+("Ricardo", "M", "Portugues"),
+("eduardo", "M", "ingles"),
+("vinicius", "F", "italiano"),
+("artur", "F", "espanhol");
+
+select * from pessoa;
+
+create database Escola;
+
+use Escola;
+
+CREATE TABLE escola(
+	id int auto_increment PRIMARY KEY,
+    nome varchar(50) NOT NULL,
+    idade int NOT NULL,
+    curso varchar(50) NOT NULL
+);
+
+insert into escola(nome, idade, curso)
+values
+("Marcola", 25, "Matematica"),
+("mateus", 20, "Portugues"),
+("marcos", 54, "Ciencia"),
+("marcio", 22, "Matematica"),
+("mauricio", 13, "Ciencia");
+
+select * from escola;
+
+CREATE TABLE profesores(
+	id int auto_increment PRIMARY KEY,
+    nome varchar(50) NOT NULL,
+    idade int NOT NULL,
+    disciplina varchar(50) NOT NULL
+);
+
+insert into profesores(nome, idade, disciplina)
+values
+("ana", 25, "Matematica"),
+("alice", 20, "Portugues"),
+("anita", 54, "Ciencia"),
+("arlete", 22, "Matematica"),
+("astra", 13, "Ciencia");
+
+select * from profesores;
+
+CREATE TABLE matricula(
+	id int auto_increment PRIMARY KEY,
+    id_escola int,
+    id_profesor int,
+    data_matricula date,
+    FOREIGN KEY (id_escola) REFERENCES escola(id),
+    FOREIGN KEY (id_profesor) REFERENCES profesores(id)
+);
+
+insert into matricula(id_escola, id_profesor, data_matricula)
+VALUES
+(1, 1, '2023-01-15'),
+(2, 1, '2023-01-15'),
+(3, 2, '2023-01-15'),
+(4, 3, '2023-01-15'),
+(1, 5, '2023-01-15');
+
+select * from matricula;
+
+select e.nome, p.nome from escola e, professores p 
+inner join matricula
+where matricula.id_escola = e.id 
+and matricula.id_professor = p.id;
+
+SELECT e.nome, p.nome 
+FROM escola e
+INNER JOIN matricula m ON m.id_escola = e.id
+INNER JOIN profesores p ON m.id_profesor = p.id;
