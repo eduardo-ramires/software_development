@@ -19,7 +19,7 @@ public class ConnectionUfn {
         try {
             conn = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/Escola?userTimeZone=true&serverTimeZone=UTC",
-                    "root", null);
+                    "root", "laboratorio");
             System.out.println("Conexão efetuada!");
             return conn;
         } catch (Exception e) {
